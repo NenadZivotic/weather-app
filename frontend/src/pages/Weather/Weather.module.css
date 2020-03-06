@@ -1,0 +1,15 @@
+.container {
+  border-radius: 10px;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 10px auto;
+  padding-bottom: 10px;
+  width: 320px;
+}
+
+.headings {
+  font-size: 24px;
+  font-weight: bold;
+}
