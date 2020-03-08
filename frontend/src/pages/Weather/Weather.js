@@ -5,37 +5,57 @@ import {
   roundNums,
   getCurrentDate
 } from "../../components/UI/Helpers/Helpers";
+import Button from "../../components/UI/Button/Button";
 
 import Styles from "./Weather.module.css";
 
-const Weather = () => {
+const Weather = props => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
+  const [disabled, setDisabled] = useState("");
+  const [invalid, setInvalid] = useState("");
+
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    props.history.push("/");
+  };
 
   const search = e => {
     e.preventDefault();
-    fetch(`/api/weather/${query}`)
+    fetch(`/api/weather/${query}`, setDisabled("disabled"))
       .then(res => res.json())
       .then(result => {
         setQuery("");
         setWeather(result);
+        setDisabled("");
       })
       .catch(error => {
-        console.log(error);
+        if (
+          error.message === "Unexpected token < in JSON at position 0" ||
+          error.message === "Unexpected end of JSON input"
+        ) {
+          setInvalid("Please provide valid city name for search...");
+          setTimeout(() => {
+            setDisabled("");
+            setInvalid("");
+          }, 2500);
+        }
       });
   };
 
   return (
     <Fragment>
       <div className={Styles.container}>
+        <Button text="Logout" onClick={logoutHandler} />
         <Search
           onSearch={e => setQuery(e.target.value)}
           value={query}
           search={search}
+          disabled={disabled}
         />
         <div>
           {typeof weather.main !== "undefined" ? (
-            <div>
+            <div style={invalid ? { display: "none" } : null}>
               <h1 className={Styles.headings}>Date: </h1>
               {getCurrentDate(new Date())}
               <h1 className={Styles.headings}>Country: </h1>{" "}
@@ -55,6 +75,7 @@ const Weather = () => {
           )}
         </div>
       </div>
+      <div className={Styles.invalid}>{invalid}</div>
     </Fragment>
   );
 };

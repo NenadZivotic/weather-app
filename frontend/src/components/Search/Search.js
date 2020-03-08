@@ -17,7 +17,7 @@ export default function Search(props) {
           onChange={props.onSearch}
           value={props.value}
         />
-        <Button text="Search" />
+        <Button disabled={props.disabled} text="Search" />
       </form>
     </div>
   );

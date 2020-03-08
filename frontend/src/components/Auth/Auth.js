@@ -1,3 +1,5 @@
+const user = localStorage.getItem("user");
+
 const Auth = {
   isAuthenticated: false,
   authenticate() {
@@ -10,4 +12,9 @@ const Auth = {
     return this.isAuthenticated;
   }
 };
+
+if (user) {
+  Auth.isAuthenticated = true;
+}
+
 export default Auth;

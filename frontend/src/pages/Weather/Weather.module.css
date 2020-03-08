@@ -13,3 +13,14 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.invalid {
+  border-radius: 10px;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 195px auto;
+  padding-bottom: 10px;
+  width: 320px;
+}

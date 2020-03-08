@@ -24,6 +24,9 @@ app.get(`/api/weather/:city`, (req, res) => {
         let parsedBody = JSON.parse(body);
         res.send(parsedBody);
       }
+      if (error === null) {
+        res.status(404).send();
+      }
     }
   );
 });

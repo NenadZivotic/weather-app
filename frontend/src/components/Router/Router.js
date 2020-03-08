@@ -12,6 +12,7 @@ const Router = props => (
     <Route path="*" exact component={Page404} />
   </Switch>
 );
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}

@@ -11,7 +11,8 @@ class Login extends Component {
     userName: "",
     password: "",
     isLoggedIn: false,
-    loginError: false
+    loginError: false,
+    noResponse: false
   };
 
   handleChange = e => {
@@ -29,18 +30,29 @@ class Login extends Component {
       .then(res => {
         if (res) {
           Auth.authenticate();
+          localStorage.setItem("user", this.state.userName);
           this.setState({ isLoggedIn: true });
           this.props.history.push("/api/weather");
         }
       })
       .catch(err => {
+        if (err.message === "Request failed with status code 500") {
+          return this.setState({ noResponse: true });
+        }
         this.setState({ loginError: true });
+        setTimeout(() => {
+          this.setState({ loginError: false });
+        }, 2500);
       });
     e.preventDefault();
   };
 
   render() {
-    return (
+    return this.state.noResponse ? (
+      <div className={Styles.noResponse}>
+        <h1>Server is down</h1>
+      </div>
+    ) : (
       <main className={Styles.main}>
         <h1 className={Styles.title}>Welcome to Weather App!</h1>
         <h3>Please Login to continue using the App!</h3>
