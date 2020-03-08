@@ -31,7 +31,7 @@ const Weather = props => {
         setQuery("");
         setWeather(result);
         setDisabled("");
-        let data = localStorage.setItem("data", JSON.stringify(result));
+        localStorage.setItem("data", JSON.stringify(result));
       })
       .catch(error => {
         if (
