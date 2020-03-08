@@ -55,8 +55,20 @@ class Login extends Component {
     ) : (
       <main className={Styles.main}>
         <h1 className={Styles.title}>Welcome to Weather App!</h1>
-        <h3>Please Login to continue using the App!</h3>
-        <form onSubmit={this.handleSubmit}>
+        <div
+          className={Styles.image}
+          style={{
+            backgroundImage: "../../assets/weather1.jpg",
+            width: "410px",
+            height: "200px",
+            position: "absolute"
+          }}
+        ></div>
+        <h3 className={Styles.subtitle}>
+          Please Login to start using the App!
+        </h3>
+        <div className={Styles.layout}></div>
+        <form onSubmit={this.handleSubmit} className={Styles.loginForm}>
           <input
             className={Styles.myInput}
             type="email"

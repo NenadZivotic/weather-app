@@ -1,4 +1,7 @@
 .myButton {
+  width: 60px;
+  font-size: 14px;
+  font-weight: bold;
   padding: 7px;
   margin-top: 10px;
   border-radius: 5px;

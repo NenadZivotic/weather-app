@@ -4,6 +4,10 @@ import Styles from "./Search.module.css";
 
 import Button from "../UI/Button/Button";
 
+const deleteFromStorage = () => {
+  localStorage.removeItem("data");
+};
+
 export default function Search(props) {
   return (
     <div className={Styles.container}>
@@ -17,7 +21,12 @@ export default function Search(props) {
           onChange={props.onSearch}
           value={props.value}
         />
-        <Button disabled={props.disabled} text="Search" />
+        <Button
+          classname={Styles.search}
+          disabled={props.disabled}
+          text="Search"
+          onClick={deleteFromStorage}
+        />
       </form>
     </div>
   );

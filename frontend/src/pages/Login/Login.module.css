@@ -4,16 +4,52 @@
   left: 0;
   right: 0;
   margin: 10px auto;
-  width: 320px;
+  width: 410px;
+  /* border: 1px solid black; */
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #095ac6;
+  height: 800px;
+  /* background-image: url("../../assets/background.jpg"); */
+  /* background-color: #095ac6; */
+}
+
+.title {
+  color: white;
+  font-size: 32px;
+  /* border: 1px solid black; */
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.subtitle {
+  color: white;
+  font-size: 24px;
+  margin-top: 250px;
+  margin-bottom: 40px;
+  /* border: 1px solid black; */
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.loginForm {
+  background-color: rgba(72, 111, 156, 0.3);
+  margin: 0 auto;
+  z-index: 100;
+  padding: 50px;
+  /* border: 1px solid black; */
+  border-radius: 10px;
 }
 
 .myInput {
+  color: black;
   text-align: center;
   border-radius: 5px;
   border: none;
   padding: 5px;
-  margin: 10px 0;
+  margin: 10px auto;
   box-shadow: 1px 1px 1px black;
+  display: block;
 }
 
 .noResponse {
@@ -22,4 +58,21 @@
   width: 100%;
   position: absolute;
   overflow: hidden;
+}
+
+form > input {
+  font-family: "Raleway", sans-serif;
+}
+
+.image {
+  background-image: url("../../assets/weather.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+@media only screen and (max-width: 410px) {
+  .main {
+    width: 320px;
+  }
 }

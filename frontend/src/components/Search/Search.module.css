@@ -1,6 +1,8 @@
 .title {
   font-size: 24px;
   font-weight: bold;
+  color: white;
+  margin-bottom: 30px;
 }
 
 .myInput {
@@ -9,4 +11,8 @@
   border: none;
   padding: 5px;
   box-shadow: 1px 1px 1px black;
+}
+
+.search {
+  margin-top: 15px;
 }

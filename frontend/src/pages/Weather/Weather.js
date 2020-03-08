@@ -9,6 +9,8 @@ import Button from "../../components/UI/Button/Button";
 
 import Styles from "./Weather.module.css";
 
+let result = "";
+
 const Weather = props => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
@@ -17,6 +19,7 @@ const Weather = props => {
 
   const logoutHandler = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("data");
     props.history.push("/");
   };
 
@@ -28,6 +31,7 @@ const Weather = props => {
         setQuery("");
         setWeather(result);
         setDisabled("");
+        let data = localStorage.setItem("data", JSON.stringify(result));
       })
       .catch(error => {
         if (
@@ -46,7 +50,11 @@ const Weather = props => {
   return (
     <Fragment>
       <div className={Styles.container}>
-        <Button text="Logout" onClick={logoutHandler} />
+        <Button
+          classname={Styles.logout}
+          text="Logout"
+          onClick={logoutHandler}
+        />
         <Search
           onSearch={e => setQuery(e.target.value)}
           value={query}
@@ -54,25 +62,50 @@ const Weather = props => {
           disabled={disabled}
         />
         <div>
-          {typeof weather.main !== "undefined" ? (
-            <div style={invalid ? { display: "none" } : null}>
-              <h1 className={Styles.headings}>Date: </h1>
-              {getCurrentDate(new Date())}
-              <h1 className={Styles.headings}>Country: </h1>{" "}
-              {getCountryName(weather.sys.country)}
-              <h1 className={Styles.headings}>City: </h1> {weather.name}
-              <h1 className={Styles.headings}>Temperature: </h1>
-              {roundNums(weather.main.temp)}
-              <h1 className={Styles.headings}>Feels like: </h1>{" "}
-              {roundNums(weather.main.feels_like)}
-              <h1 className={Styles.headings}>Min temperature: </h1>
-              {roundNums(weather.main.temp_min)}
-              <h1 className={Styles.headings}>Humidity: </h1>{" "}
-              {weather.main.humidity}%
-            </div>
-          ) : (
-            ""
-          )}
+          {
+            ((result = JSON.parse(localStorage.getItem("data"))),
+            result ? (
+              <div style={invalid ? { display: "none" } : null}>
+                <div className={Styles.miniContainer}>
+                  <h1 className={Styles.headings}>Date: </h1>
+                  <p>{getCurrentDate(new Date())}</p>
+                  <h1 className={Styles.headings}>Country: </h1>{" "}
+                  <p>{getCountryName(result.sys.country)}</p>
+                  <h1 className={Styles.headings}>City: </h1>{" "}
+                  <p>{result.name}</p>
+                  <h1 className={Styles.headings}>Temperature: </h1>
+                  <p>{roundNums(result.main.temp)}</p>
+                  <h1 className={Styles.headings}>Feels like: </h1>{" "}
+                  <p>{roundNums(result.main.feels_like)}</p>
+                  <h1 className={Styles.headings}>Min temperature: </h1>
+                  <p>{roundNums(result.main.temp_min)}</p>
+                  <h1 className={Styles.headings}>Humidity: </h1>{" "}
+                  <p>{result.main.humidity}%</p>
+                </div>
+              </div>
+            ) : typeof weather.main !== "undefined" ? (
+              <div style={invalid ? { display: "none" } : null}>
+                <div className={Styles.miniContainer}>
+                  <h1 className={Styles.headings}>Date: </h1>
+                  <p>{getCurrentDate(new Date())}</p>
+                  <h1 className={Styles.headings}>Country: </h1>{" "}
+                  <p>{getCountryName(weather.sys.country)}</p>
+                  <h1 className={Styles.headings}>City: </h1>{" "}
+                  <p>{weather.name}</p>
+                  <h1 className={Styles.headings}>Temperature: </h1>
+                  <p>{roundNums(weather.main.temp)}</p>
+                  <h1 className={Styles.headings}>Feels like: </h1>{" "}
+                  <p>{roundNums(weather.main.feels_like)}</p>
+                  <h1 className={Styles.headings}>Min temperature: </h1>
+                  <p>{roundNums(weather.main.temp_min)}</p>
+                  <h1 className={Styles.headings}>Humidity: </h1>{" "}
+                  <p>{weather.main.humidity}%</p>
+                </div>
+              </div>
+            ) : (
+              ""
+            ))
+          }
         </div>
       </div>
       <div className={Styles.invalid}>{invalid}</div>
